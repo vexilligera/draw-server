@@ -10,6 +10,7 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 const config = require('./routes/config')
 const register = require('./routes/register')
+const listfile = require('./routes/listfile')
 
 // error handler
 onerror(app)
@@ -43,6 +44,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(register.routes(), register.allowedMethods())
 app.use(config.routes(), config.allowedMethods())
+app.use(listfile.routes(), listfile.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
