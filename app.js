@@ -13,6 +13,7 @@ const register = require('./routes/register')
 const listfile = require('./routes/listfile')
 const converter = require('./routes/converter')
 const create = require('./routes/create')
+const thumbnail = require('./routes/thumbnail')
 
 // error handler
 onerror(app)
@@ -49,6 +50,7 @@ app.use(config.routes(), config.allowedMethods())
 app.use(listfile.routes(), listfile.allowedMethods())
 app.use(converter.routes(), converter.allowedMethods())
 app.use(create.routes(), create.allowedMethods())
+app.use(thumbnail.routes(), thumbnail.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
