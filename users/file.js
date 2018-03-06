@@ -49,9 +49,8 @@ router.get('/thumbnail/:id/:name', async (ctx, next) => {
       var thumbnailPath = projectPath + "/" + "thumbnail.png";
       shell.exec('convert ' + psdPath + ' -thumbnail "800x800>" ' + thumbnailPath);
       let attachmentPath = './users/' + ctx.params.id + '/' + ctx.params.name + '/thumbnail.png';
-      ctx.attachment('../users/' + ctx.params.id + '/' + ctx.params.name + '/thumbnail.png');
-      fs.writeFileSync('routes/thumbnail.png', fs.readFileSync(attachmentPath))
-      await send(ctx, 'thumbnail.png', {root: __dirname})
+      ctx.attachment(ctx.params.id + '/' + ctx.params.name + '/thumbnail.png');
+      await send(ctx, ctx.params.id + '/' + ctx.params.name + '/thumbnail.png', {root: __dirname})
     } else {
       ctx.body = "project not exists!";
     }

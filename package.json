@@ -20,10 +20,6 @@
     "koa-router": "^7.1.1",
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.1",
-<<<<<<< HEAD
-=======
-    "koa2": "^2.0.0-alpha.7",
->>>>>>> origin/master
     "mkdirp": "^0.5.1",
     "pug": "^2.0.0-rc.1",
     "shelljs": "^0.8.1"

@@ -10,7 +10,7 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 const config = require('./routes/config')
 const register = require('./routes/register')
-const file = require('./routes/file')
+const file = require('./users/file')
 
 // error handler
 onerror(app)
