@@ -10,6 +10,11 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 const config = require('./routes/config')
 const register = require('./routes/register')
+<<<<<<< HEAD
+=======
+const listfile = require('./routes/listfile')
+const converter = require('./routes/converter')
+>>>>>>> origin/master
 const file = require('./routes/file')
 
 // error handler
@@ -44,6 +49,11 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(register.routes(), register.allowedMethods())
 app.use(config.routes(), config.allowedMethods())
+<<<<<<< HEAD
+=======
+app.use(listfile.routes(), listfile.allowedMethods())
+app.use(converter.routes(), converter.allowedMethods())
+>>>>>>> origin/master
 app.use(file.routes(), file.allowedMethods())
 
 // error-handling

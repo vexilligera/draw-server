@@ -1,6 +1,9 @@
 const router = require('koa-router')()
 const shell = require('shelljs');
+<<<<<<< HEAD
 const fs = require('fs');
+=======
+>>>>>>> origin/master
 
 router.prefix('/file')
 
@@ -9,6 +12,11 @@ router.get('/', function (ctx, next) {
 })
 
 router.get('/create/:id/:name/:width/:height', function(ctx, next) {
+<<<<<<< HEAD
+=======
+  var fs = require('fs');
+
+>>>>>>> origin/master
   var mkdirp = require('mkdirp');
   var path = "./users/" + ctx.params.id + "/";
   var size = ctx.params.width + 'x' + ctx.params.height;
@@ -31,6 +39,7 @@ router.get('/create/:id/:name/:width/:height', function(ctx, next) {
   } else {
     ctx.body = "user not found";
   }
+<<<<<<< HEAD
 })
 
 router.get('/list/:id', function (ctx, next) {
@@ -61,3 +70,27 @@ router.get('/thumbnail/:id/:name', function (ctx, next) {
 })
 
 module.exports = router
+=======
+})
+
+router.get('/thumbnail/:id/:name', function (ctx, next) {
+  var fs = require('fs');
+  var path = "./users/" + ctx.params.id + "/";
+  if (fs.existsSync(path)) {
+    var projectPath = path + ctx.params.name;
+    if (fs.existsSync(projectPath)) {
+      var psdPath = projectPath + "/" + ctx.params.name + ".psd[0]";
+      var thumbnailPath = projectPath + "/" + "thumbnail.png";
+      shell.exec('convert ' + psdPath + ' -thumbnail "800x800>" ' + thumbnailPath);
+      ctx.attachment(psdPath);
+    } else {
+      ctx.body = "project not exists!";
+    }
+  } else {
+    ctx.body = "user not exists!";
+  }
+})
+
+
+module.exports = router
+>>>>>>> origin/master
