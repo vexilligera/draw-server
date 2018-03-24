@@ -11,13 +11,14 @@ const users = require('./routes/users')
 const config = require('./routes/config')
 const register = require('./routes/register')
 const file = require('./users/file')
+const save = require('./routes/save')
 
 // error handler
 onerror(app)
 
 // middlewares
 app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
+  enableTypes:['json', 'form', 'text'], formLimit: '5mb'
 }))
 app.use(json())
 app.use(logger())
@@ -45,6 +46,7 @@ app.use(users.routes(), users.allowedMethods())
 app.use(register.routes(), register.allowedMethods())
 app.use(config.routes(), config.allowedMethods())
 app.use(file.routes(), file.allowedMethods())
+app.use(save.routes(), save.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

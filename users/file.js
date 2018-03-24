@@ -2,6 +2,10 @@ const router = require('koa-router')()
 const send = require('koa-send')
 const shell = require('shelljs')
 const fs = require('fs')
+var Busboy = require('koa-busboy');
+
+const uploader = Busboy({
+})
 
 router.prefix('/file')
 
@@ -58,5 +62,30 @@ router.get('/thumbnail/:id/:name', async (ctx, next) => {
     ctx.body = "user not exists!";
   }
 })
+
+router.get('/delete/:id/:name', function (ctx, next) {
+  var path = "./users/" + ctx.params.id + "/" + ctx.params.name;
+  if (fs.existsSync(path)) {
+    shell.exec("rm -r " + path);
+    ctx.body = "0"
+    // success
+  } else {
+    ctx.body = "1";
+    // file not found
+  }
+})
+
+router.post('/upload/:id/:name', uploader, async ctx => {
+  var mkdirp = require('mkdirp');
+  let fileReadStream = ctx.request.files[0];
+  var path = './users/' + ctx.params.id + "/";
+  mkdirp(path + ctx.params.name, function (err) {
+    if (err) console.error(err)
+  });
+  var writeStream = fs.createWriteStream(path +
+    ctx.params.name + "/" + ctx.params.name + ".psd");
+  fileReadStream.pipe(writeStream);
+})
+
 
 module.exports = router
