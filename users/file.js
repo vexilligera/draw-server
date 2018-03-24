@@ -87,5 +87,21 @@ router.post('/upload/:id/:name', uploader, async ctx => {
   fileReadStream.pipe(writeStream);
 })
 
+router.get('/download/:id/:name', async (ctx, next) => {
+  var path = "./users/" + ctx.params.id + "/";
+  if (fs.existsSync(path)) {
+    var projectPath = path + ctx.params.name;
+    if (fs.existsSync(projectPath)) {
+      console.log(ctx.params.name + '/' + ctx.params.name + '.psd');
+      ctx.attachment(ctx.params.id + '/' + ctx.params.name + '/' + ctx.params.name + '.psd');
+      await send(ctx, ctx.params.id + '/' + ctx.params.name + '/' + ctx.params.name + '.psd', { root: __dirname })
+    } else {
+      ctx.body = "project not exists!";
+    }
+  } else {
+    ctx.body = "user not exists!";
+  }
+})
+
 
 module.exports = router
